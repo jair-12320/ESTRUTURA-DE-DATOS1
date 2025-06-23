@@ -49,7 +49,37 @@ Nodo* buscarPorID(Nodo* raiz, int id) {
     if (raiz == NULL) return NULL;
     if (raiz->id == id) return raiz;
     return (id < raiz->id) ? buscarPorID(raiz->izq, id) : buscarPorID(raiz->der, id);
+} // Muestra a todos los hijos y nietos (descendientes)
+void mostrarDescendientes(Nodo* persona) {
+    if (persona == NULL) return;
+    if (persona->izq != NULL) {
+        cout << "Hijo: (" << persona->izq->id << ") " << persona->izq->nombre << "\n";
+        mostrarDescendientes(persona->izq);
+    }
+    if (persona->der != NULL) {
+        cout << "Hijo: (" << persona->der->id << ") " << persona->der->nombre << "\n";
+        mostrarDescendientes(persona->der);
+    }
 }
+
+// Muestra los familiares directos de una persona
+void mostrarRelacion(Nodo* persona) {
+    if (persona == NULL) return;
+    cout << "Nombre: " << persona->nombre << " (ID: " << persona->id << ")\n";
+
+    if (persona->padre != NULL)
+        cout << "Padre: " << persona->padre->nombre << " (ID: " << persona->padre->id << ")\n";
+    else
+        cout << "No tiene padre registrado (es raíz).\n";
+
+    if (persona->izq != NULL)
+        cout << "Hijo izquierdo: " << persona->izq->nombre << " (ID: " << persona->izq->id << ")\n";
+    if (persona->der != NULL)
+        cout << "Hijo derecho: " << persona->der->nombre << " (ID: " << persona->der->id << ")\n";
+    if (persona->izq == NULL && persona->der == NULL)
+        cout << "No tiene hijos registrados.\n";
+}
+
 
 void menuGenealogia() {
     Nodo* raiz = NULL;
@@ -62,6 +92,9 @@ void menuGenealogia() {
         cout << "2. Insertar descendiente\n";
         cout << "3. Mostrar arbol\n";
         cout << "4. Mostrar ancestros por ID\n";
+        cout << "5. Mostrar descendientes por ID\n";
+        cout << "6. Mostrar relaciones familiares\n";
+
         cout << "10. Salir\n";
         cout << "Seleccione una opción: ";
         cin >> opcion;
@@ -109,6 +142,29 @@ void menuGenealogia() {
                     }
                 }
                 break;
+           case 5:
+                cout << "Ingrese ID de la persona: "; cin >> id;
+                {
+                    Nodo* p = buscarPorID(raiz, id);
+                    if (p != NULL)
+                        mostrarDescendientes(p);
+                    else
+                        cout << "Persona no encontrada.\n";
+                }
+                break;
+
+            case 6:
+                cout << "Ingrese ID de la persona: "; cin >> id;
+                {
+                    Nodo* p = buscarPorID(raiz, id);
+                    if (p != NULL)
+                        mostrarRelacion(p);
+                    else
+                        cout << "Persona no encontrada.\n";
+                }
+                break;
+
+
 
                 
                 

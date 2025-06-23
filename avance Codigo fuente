@@ -42,6 +42,27 @@ Nodo* insertar(Nodo* raiz, Nodo* nuevo) {
     return raiz;
 }
 
+// Muestra el árbol como si fuera dibujado de lado
+void mostrarArbol(Nodo* raiz, int espacio = 0, int separacion = 5) {
+    if (raiz == NULL) return;
+    espacio += separacion;
+    mostrarArbol(raiz->der, espacio); // Mostramos primero el lado derecho
+    cout << endl;
+    for (int i = separacion; i < espacio; i++) cout << " ";
+    cout << "(" << raiz->id << ") " << raiz->nombre << "\n"; // Mostramos la persona
+    mostrarArbol(raiz->izq, espacio); // Luego el lado izquierdo
+}
+// Muestra a todos los abuelitos o padres, POR iD (ancestros)
+void mostrarAncestros(Nodo* persona) {
+    Nodo* actual = persona->padre;
+    while (actual != NULL) {
+        cout << " <- (" << actual->id << ") " << actual->nombre;
+        actual = actual->padre; // Subimos al siguiente padre
+    }
+    cout << "\n";
+}
+
+
 // Buscar un nodo por su ID
 Nodo* buscar(Nodo* raiz, int id) {
     if (raiz == NULL || raiz->id == id) {

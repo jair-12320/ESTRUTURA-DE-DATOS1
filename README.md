@@ -60,6 +60,8 @@ void menuGenealogia() {
         cout << "\n--- MENU GENEALOGICO CON ID ---\n";
         cout << "1. Ingresar ancestro principal\n";
         cout << "2. Insertar descendiente\n";
+        cout << "3. Mostrar arbol\n";
+        cout << "4. Mostrar ancestros por ID\n";
         cout << "10. Salir\n";
         cout << "Seleccione una opción: ";
         cin >> opcion;
@@ -90,6 +92,24 @@ void menuGenealogia() {
                         cout << "No se encontró ese ID en el árbol.\n";
                 }
                 break;
+            
+            case 3:
+                mostrarArbol(raiz);
+                break;
+
+            case 4:
+                cout << "Ingrese ID de la persona: "; cin >> id;
+                {
+                    Nodo* p = buscarPorID(raiz, id);
+                    if (p != NULL) {
+                        cout << "Ancestros de (" << id << ") " << p->nombre << ":";
+                        mostrarAncestros(p);
+                    } else {
+                        cout << "Persona no encontrada.\n";
+                    }
+                }
+                break;
+
                 
                 
             case 10:

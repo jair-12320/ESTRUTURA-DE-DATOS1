@@ -88,7 +88,13 @@ void preorden(Nodo* raiz) {
     preorden(raiz->der);
 }
 
-
+// Recorre: izquierda - nodo - derecha
+void inorden(Nodo* raiz) {
+    if (raiz == NULL) return;
+    inorden(raiz->izq);
+    cout << "(" << raiz->id << ") " << raiz->nombre << "  ";
+    inorden(raiz->der);
+}
 
 void menuGenealogia() {
     Nodo* raiz = NULL;
@@ -104,6 +110,7 @@ void menuGenealogia() {
         cout << "5. Mostrar descendientes por ID\n";
         cout << "6. Mostrar relaciones familiares\n";
         cout << "7. Recorrido Preorden\n";
+        cout << "8. Recorrido Inorden\n";
 
         cout << "10. Salir\n";
         cout << "Seleccione una opción: ";
@@ -180,10 +187,12 @@ void menuGenealogia() {
                 cout << "\n";
                 break;
 
-
-
-
-                
+            case 8:
+                cout << "\nRecorrido Inorden:\n";
+                inorden(raiz);
+                cout << "\n";
+                break;
+               
                 
             case 10:
                 cout << "Saliendo...\n";

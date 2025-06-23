@@ -126,11 +126,11 @@ void menuGenealogia() {
                 }
                 break;
             
-            case 3:
+           case 3:
                 mostrarArbol(raiz);
                 break;
 
-            case 4:
+           case 4:
                 cout << "Ingrese ID de la persona: "; cin >> id;
                 {
                     Nodo* p = buscarPorID(raiz, id);
